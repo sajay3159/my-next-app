@@ -1,27 +1,19 @@
 import Link from "next/link";
 
-// Sample product data
-const products = [
-  { id: 1, name: "Laptop" },
-  { id: 2, name: "Smartphone" },
-  { id: 3, name: "Headphones" },
-  { id: 4, name: "Keyboard" },
-  { id: 5, name: "Mouse" },
-  { id: 6, name: "Monitor" },
-  { id: 7, name: "Printer" },
-  { id: 8, name: "Camera" },
-  { id: 9, name: "Tablet" },
-  { id: 10, name: "Smartwatch" },
-];
+export const revalidate = 60;
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const res = await fetch("https://dummyjson.com/products");
+  const data = await res.json();
+  const products = data.products;
+
   return (
     <div>
-      <h1>Products Page</h1>
+      <h1>All Products</h1>
       <ul>
         {products.map((product) => (
           <li key={product.id}>
-            <Link href={`/products/${product.id}`}>{product.name}</Link>
+            <Link href={`/products/${product.id}`}>{product.title}</Link>
           </li>
         ))}
       </ul>

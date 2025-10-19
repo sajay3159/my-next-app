@@ -1,14 +1,24 @@
-"use client";
+export async function generateStaticParams() {
+  const res = await fetch("https://dummyjson.com/products");
+  const data = await res.json();
 
-import { useParams } from "next/navigation";
+  return data.products.map((product) => ({
+    id: product.id.toString(),
+  }));
+}
 
-export default function ProductDetailClient() {
-  const params = useParams();
-  const { id } = params;
+export const revalidate = 60;
+
+export default async function ProductDetailPage({ params }) {
+  const res = await fetch(`https://dummyjson.com/products/${params.id}`);
+  const product = await res.json();
 
   return (
     <div>
-      <h2>Product {id} details page — content coming soon!</h2>
+      <h2>{product.title}</h2>
+      <p>{product.description}</p>
+      <p>Price: ${product.price}</p>
+      <img src={product.thumbnail} alt={product.title} width={200} />
     </div>
   );
 }
