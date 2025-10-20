@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export const revalidate = 60;
@@ -16,6 +17,7 @@ export default async function ProductsPage() {
             <Link href={`/products/${product.id}`}>{product.title}</Link>
           </li>
         ))}
+        <Image src="/Superman.jpg" alt="Superman" width={300} height={500} />{" "}
       </ul>
     </div>
   );
