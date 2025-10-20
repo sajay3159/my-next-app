@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import Image from "next/image";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,10 +21,23 @@ export default function RootLayout({ children }) {
           style={{
             padding: "1rem",
             background: "#000000ff",
-            textAlign: "center",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
-          <h1>Product Store</h1>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Image
+              src="/Pngtree.png"
+              alt="Logo"
+              width={40}
+              height={40}
+              style={{ marginRight: "0.5rem", borderRadius: "4px" }}
+            />
+            <h1 style={{ color: "#fff", fontSize: "1.5rem", margin: 0 }}>
+              Product Store
+            </h1>
+          </div>
           <nav>
             <Link href="/" style={{ marginRight: "1rem" }}>
               Home
